@@ -1,5 +1,11 @@
 const id = localStorage.getItem("editId");
 
+const token = localStorage.getItem("token");
+
+if (!token) {
+    window.location.href = "login.html";
+}
+
 document.getElementById("name").value = localStorage.getItem("editName");
 document.getElementById("category").value = localStorage.getItem("editCategory");
 document.getElementById("amount").value = localStorage.getItem("editAmount");
@@ -33,7 +39,8 @@ form.addEventListener("submit", async (e) => {
     await fetch(`https://personal-expense-tracker-9j1g.onrender.com/api/expenses/${id}`, {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": token
         },
         body: JSON.stringify(updatedExpense)
     });

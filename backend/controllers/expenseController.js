@@ -2,7 +2,7 @@ const Expense = require("../models/Expense");
 
 exports.getExpenses = async (req, res) => {
     try {
-        const expenses = await Expense.find().sort({ createdAt: -1 });
+        const expenses = await Expense.find({ user: req.user }).sort({ createdAt: -1 });
         res.json(expenses);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -17,7 +17,8 @@ exports.addExpense = async (req, res) => {
             name,
             category,
             amount,
-            date
+            date,
+            user: req.user
         });
 
         const savedExpense = await expense.save();

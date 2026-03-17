@@ -1,6 +1,18 @@
 async function loadDashboard() {
 
-    const response = await fetch("https://personal-expense-tracker-9j1g.onrender.com/api/expenses");
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const response = await fetch("https://personal-expense-tracker-9j1g.onrender.com/api/expenses", {
+        headers: {
+            "Authorization": token
+        }
+    });
+
     const expenses = await response.json();
 
     let total = 0;
@@ -21,25 +33,11 @@ async function loadDashboard() {
 
         total += amount;
 
-        if (expense.category === "Food") {
-            food += amount;
-        }
-
-        if (expense.category === "Travel") {
-            travel += amount;
-        }
-
-        if (expense.category === "Shopping") {
-            shopping += amount;
-        }
-
-        if (expense.category === "Bills") {
-            bills += amount;
-        }
-
-        if (expense.category === "Other") {
-            other += amount;
-        }
+        if (expense.category === "Food") food += amount;
+        if (expense.category === "Travel") travel += amount;
+        if (expense.category === "Shopping") shopping += amount;
+        if (expense.category === "Bills") bills += amount;
+        if (expense.category === "Other") other += amount;
 
         if (date.getMonth() === currentMonth && date.getFullYear() === currentYear) {
             monthTotal += amount;

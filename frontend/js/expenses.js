@@ -1,6 +1,18 @@
 async function loadExpenses() {
 
-    const response = await fetch("https://personal-expense-tracker-9j1g.onrender.com/api/expenses");
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const response = await fetch("https://personal-expense-tracker-9j1g.onrender.com/api/expenses", {
+        headers: {
+            "Authorization": token
+        }
+    });
+
     const expenses = await response.json();
 
     const table = document.getElementById("expenseTable");
@@ -51,14 +63,17 @@ async function loadExpenses() {
 
 async function deleteExpense(id) {
 
+    const token = localStorage.getItem("token");
+
     const confirmDelete = confirm("Are you sure you want to delete this expense?");
 
-    if (!confirmDelete) {
-        return;
-    }
+    if (!confirmDelete) return;
 
-    await fetch(`http://localhost:5000/api/expenses/${id}`, {
-        method: "DELETE"
+    await fetch(`https://personal-expense-tracker-9j1g.onrender.com/api/expenses/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": token
+        }
     });
 
     loadExpenses();
@@ -89,11 +104,7 @@ function searchExpenses() {
 
         const text = row.innerText.toLowerCase();
 
-        if (text.includes(input)) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
+        row.style.display = text.includes(input) ? "" : "none";
 
     });
 
@@ -109,11 +120,7 @@ function filterCategory() {
 
         const category = row.children[1].innerText;
 
-        if (selected === "all" || category === selected) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
+        row.style.display = (selected === "all" || category === selected) ? "" : "none";
 
     });
 
@@ -139,13 +146,8 @@ function sortExpenses() {
         const amountA = parseFloat(a.children[2].innerText.replace("₹", "").replace(",", ""));
         const amountB = parseFloat(b.children[2].innerText.replace("₹", "").replace(",", ""));
 
-        if (option === "high") {
-            return amountB - amountA;
-        }
-
-        if (option === "low") {
-            return amountA - amountB;
-        }
+        if (option === "high") return amountB - amountA;
+        if (option === "low") return amountA - amountB;
 
         return 0;
 
@@ -155,8 +157,6 @@ function sortExpenses() {
 
     table.innerHTML = "";
 
-    rows.forEach(row => {
-        table.appendChild(row);
-    });
+    rows.forEach(row => table.appendChild(row));
 
 }

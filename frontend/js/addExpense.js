@@ -4,6 +4,13 @@ form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
     const name = document.getElementById("name").value;
     const category = document.getElementById("category").value;
     const amount = document.getElementById("amount").value;
@@ -25,7 +32,8 @@ form.addEventListener("submit", async (e) => {
     await fetch("https://personal-expense-tracker-9j1g.onrender.com/api/expenses", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": token
         },
         body: JSON.stringify(expense)
     });
