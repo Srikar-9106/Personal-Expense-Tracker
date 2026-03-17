@@ -30,7 +30,7 @@ form.addEventListener("submit", async (e) => {
         date
     };
 
-    await fetch(`http://localhost:5000/api/expenses/${id}`, {
+    await fetch(`https://personal-expense-tracker-9j1g.onrender.com/api/expenses/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

@@ -22,7 +22,7 @@ form.addEventListener("submit", async (e) => {
         date
     };
 
-    await fetch("http://localhost:5000/api/expenses", {
+    await fetch("https://personal-expense-tracker-9j1g.onrender.com/api/expenses", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -1,6 +1,6 @@
 async function loadDashboard() {
 
-    const response = await fetch("http://localhost:5000/api/expenses");
+    const response = await fetch("https://personal-expense-tracker-9j1g.onrender.com/api/expenses");
     const expenses = await response.json();
 
     let total = 0;
