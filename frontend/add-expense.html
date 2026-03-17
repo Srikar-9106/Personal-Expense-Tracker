@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Expense</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>Expense Tracker</h2>
+
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="add-expense.html">Add Expense</a>
+            <a href="expenses.html">View Expenses</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <h1>Add Expense</h1>
+
+        <div class="card form-card">
+
+            <form id="expenseForm">
+
+                <label>Expense Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter expense name (e.g., Lunch, Taxi, Electricity bill)"
+                    required
+                >
+
+                <label>Category</label>
+                <select id="category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Bills">Bills</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Amount</label>
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="Enter amount (₹)"
+                    required
+                >
+
+                <label>Date</label>
+                <input type="date" id="date" required>
+
+                <button type="submit">Add Expense</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="js/addExpense.js"></script>
+
+    <footer class="footer">
+        Personal Expense Tracker © 2026 | Developed by Darisipudi Venkata Ratna Srikar
+    </footer>
+
+</body>
+
+</html>

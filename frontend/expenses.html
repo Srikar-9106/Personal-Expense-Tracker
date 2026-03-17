@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Expenses</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>Expense Tracker</h2>
+
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="add-expense.html">Add Expense</a>
+            <a href="expenses.html">View Expenses</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <h1>All Expenses</h1>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search expenses..."
+            onkeyup="searchExpenses()"
+        >
+
+        <select id="categoryFilter" onchange="filterCategory()">
+            <option value="all">All Categories</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <select id="sortOption" onchange="sortExpenses()">
+            <option value="date">Sort by Date</option>
+            <option value="high">Amount High → Low</option>
+            <option value="low">Amount Low → High</option>
+        </select>
+
+        <button onclick="clearFilters()">Clear Filters</button>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="expenseTable">
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script src="js/expenses.js"></script>
+
+    <footer class="footer">
+        Personal Expense Tracker © 2026 | Developed by Darisipudi Venkata Ratna Srikar
+    </footer>
+
+</body>
+
+</html>
